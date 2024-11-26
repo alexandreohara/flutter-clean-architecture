@@ -4,7 +4,8 @@ Code Challenge using Clean Architecture. The app shows a user list displaying `n
 
 ## Preview
 
-[gifs]
+![listview](https://github.com/user-attachments/assets/e7d8d566-0ce6-463d-9ba4-c2d17fc691ba)
+![listview](https://github.com/user-attachments/assets/f6bbaf3c-e721-4979-811d-f2008642c658)
 
 ## Dependencies
 
