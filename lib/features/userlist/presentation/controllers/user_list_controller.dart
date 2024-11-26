@@ -5,7 +5,8 @@ import '../../domain/usecases/get_users_usecase.dart';
 class UserListController extends GetxController {
   final GetUsersUseCase getUsersUseCase;
 
-  var users = <UserEntity>[];
+  var users = <UserEntity>[].obs;
+  var isLoading = true.obs;
 
   UserListController(this.getUsersUseCase);
 
@@ -17,6 +18,13 @@ class UserListController extends GetxController {
   }
 
   void fetchUsers() async {
-    users = await getUsersUseCase();
+    try {
+      isLoading.value = true;
+      users.value = await getUsersUseCase();
+    } catch (e) {
+      Get.snackbar('Error', 'Failed to load remote users: $e');
+    } finally {
+      isLoading.value = false;
+    }
   }
 }
