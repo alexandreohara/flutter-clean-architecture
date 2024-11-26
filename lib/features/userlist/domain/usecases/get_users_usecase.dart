@@ -6,7 +6,7 @@ class GetUsersUseCase {
 
   GetUsersUseCase(this.repository);
 
-  List<UserEntity> call() {
-    return repository.getUsers();
+  Future<List<UserEntity>> call() async {
+    return await repository.getUsers();
   }
 }

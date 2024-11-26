@@ -16,7 +16,7 @@ class UserListController extends GetxController {
     update();
   }
 
-  void fetchUsers() {
-    users = getUsersUseCase();
+  void fetchUsers() async {
+    users = await getUsersUseCase();
   }
 }

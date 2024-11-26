@@ -1,6 +1,7 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../data/data_source/mock_user_data_source.dart';
+import '../../data/data_source/user_data_source.dart';
 import '../../data/repositories/user_repository_impl.dart';
 import '../../domain/usecases/get_users_usecase.dart';
 import '../controllers/user_list_controller.dart';
@@ -15,7 +16,7 @@ class UserListPage extends StatelessWidget {
     final controller = Get.put(
       UserListController(
         GetUsersUseCase(
-          UserRepositoryImpl(MockUserDataSource()),
+          UserRepositoryImpl(RemoteUserDataSource(Dio())),
         ),
       ),
     );

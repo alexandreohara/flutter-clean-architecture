@@ -1,14 +1,14 @@
+import 'package:users_list/features/userlist/data/data_source/user_data_source.dart';
 import 'package:users_list/features/userlist/domain/repositories/user_repository.dart';
 import '../../domain/entities/user_entity.dart';
-import '../data_source/mock_user_data_source.dart';
 
 class UserRepositoryImpl implements UserRepository {
-  final MockUserDataSource dataSource;
+  final RemoteUserDataSource dataSource;
 
   UserRepositoryImpl(this.dataSource);
 
   @override
-  List<UserEntity> getUsers() {
+  Future<List<UserEntity>> getUsers() async {
     return dataSource.getUsers();
   }
 }
