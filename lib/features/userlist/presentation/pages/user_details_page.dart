@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 import '../../domain/entities/user_entity.dart';
 
 class UserDetailsPage extends StatelessWidget {
   final UserEntity user;
+  final int index;
 
-  const UserDetailsPage({super.key, required this.user});
+  const UserDetailsPage({super.key, required this.user, required this.index});
 
   @override
   Widget build(BuildContext context) {
@@ -19,10 +21,10 @@ class UserDetailsPage extends StatelessWidget {
             expandedHeight: 350,
             pinned: true,
             stretch: true,
-            leading: Container(
-              padding: const EdgeInsets.only(left: 24),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(48),
+            leading: InkWell(
+              onTap: () => Get.back(),
+              child: Container(
+                padding: const EdgeInsets.only(left: 16),
                 child: Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
@@ -42,7 +44,7 @@ class UserDetailsPage extends StatelessWidget {
                 StretchMode.zoomBackground,
               ],
               background: Hero(
-                tag: user.avatarUrl!,
+                tag: 'avatar-$index',
                 child: Image.network(
                   user.avatarUrl!,
                   fit: BoxFit.cover,
@@ -56,8 +58,9 @@ class UserDetailsPage extends StatelessWidget {
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(32),
-                      topRight: Radius.circular(32)),
+                    topLeft: Radius.circular(32),
+                    topRight: Radius.circular(32),
+                  ),
                 ),
               ),
             ),
@@ -65,9 +68,37 @@ class UserDetailsPage extends StatelessWidget {
           SliverToBoxAdapter(
             child: Container(
               padding: const EdgeInsets.all(24),
-              child: const Column(
+              child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [Text('teste')],
+                children: [
+                  Hero(
+                    tag: 'name-$index',
+                    child: Text(
+                      user.name ?? 'Name',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineLarge!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Hero(
+                    tag: 'email-$index',
+                    child: Text(
+                      user.email ?? 'Email',
+                      style: Theme.of(context).textTheme.bodyLarge,
+                    ),
+                  ),
+                  Text(user.phone ?? 'Phone',
+                      style: Theme.of(context).textTheme.bodyLarge),
+                  Text(user.city ?? 'City',
+                      style: Theme.of(context).textTheme.bodyLarge),
+                  Text(user.state ?? 'State',
+                      style: Theme.of(context).textTheme.bodyLarge),
+                  Text(user.country ?? 'Country',
+                      style: Theme.of(context).textTheme.bodyLarge),
+                  Text(user.birthday ?? 'Birthday',
+                      style: Theme.of(context).textTheme.bodyLarge),
+                ],
               ),
             ),
           ),

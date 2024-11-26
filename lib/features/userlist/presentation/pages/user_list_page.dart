@@ -23,7 +23,7 @@ class UserListPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(title: const Text('Lista de usuários')),
       body: ListView.separated(
-        padding: const EdgeInsets.all(16),
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 48),
         itemCount: controller.users.length,
         separatorBuilder: (BuildContext context, int index) => const SizedBox(
           height: 16,
@@ -32,16 +32,26 @@ class UserListPage extends StatelessWidget {
           UserEntity user = controller.users[index];
           return ListTile(
             onTap: () {
-              Get.to(() => UserDetailsPage(user: user));
+              Get.to(() => UserDetailsPage(user: user, index: index));
             },
             leading: Hero(
-              tag: user.avatarUrl!,
+              tag: 'avatar-$index',
               child: CircleAvatar(
                 backgroundImage: NetworkImage(user.avatarUrl ?? ''),
               ),
             ),
-            title: Text(user.name ?? 'name'),
-            subtitle: Text(user.email ?? 'email'),
+            title: Hero(
+                tag: 'name-$index',
+                child: Text(
+                  user.name ?? 'name',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                )),
+            subtitle: Hero(
+                tag: 'email-$index',
+                child: Text(
+                  user.email ?? 'email',
+                  style: Theme.of(context).textTheme.bodyMedium,
+                )),
             trailing: const Icon(Icons.navigate_next),
             shape: RoundedRectangleBorder(
               side: const BorderSide(color: Colors.grey, width: 1),
