@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:users_list/utils/constants.dart';
 import '../../data/data_source/user_data_source.dart';
 import '../../data/repositories/user_repository_impl.dart';
 import '../../domain/usecases/get_users_usecase.dart';
@@ -28,11 +29,12 @@ class UserListPage extends StatelessWidget {
             controller.fetchUsers();
           },
           child: ListView.separated(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 48),
+            padding: const EdgeInsets.symmetric(
+                horizontal: spacing_16, vertical: spacing_48),
             itemCount: controller.users.length,
             separatorBuilder: (BuildContext context, int index) =>
                 const SizedBox(
-              height: 16,
+              height: spacing_16,
             ),
             itemBuilder: (context, index) {
               UserEntity user = controller.users[index];
@@ -61,7 +63,7 @@ class UserListPage extends StatelessWidget {
                 trailing: const Icon(Icons.navigate_next),
                 shape: RoundedRectangleBorder(
                   side: const BorderSide(color: Colors.grey, width: 1),
-                  borderRadius: BorderRadius.circular(16),
+                  borderRadius: BorderRadius.circular(borderRadius_16),
                 ),
               );
             },
@@ -69,9 +71,5 @@ class UserListPage extends StatelessWidget {
         );
       }),
     );
-  }
-
-  Future<void> _reloadData() async {
-    Get.find().fetchUsers();
   }
 }

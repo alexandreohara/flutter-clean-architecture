@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
+import 'package:users_list/utils/constants.dart';
 import '../../domain/entities/user_entity.dart';
 
 class UserDetailsPage extends StatelessWidget {
@@ -24,7 +25,7 @@ class UserDetailsPage extends StatelessWidget {
             leading: InkWell(
               onTap: () => Get.back(),
               child: Container(
-                padding: const EdgeInsets.only(left: 16),
+                padding: const EdgeInsets.only(left: spacing_16),
                 child: Container(
                   alignment: Alignment.center,
                   decoration: BoxDecoration(
@@ -58,8 +59,8 @@ class UserDetailsPage extends StatelessWidget {
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(32),
-                    topRight: Radius.circular(32),
+                    topLeft: Radius.circular(borderRadius_32),
+                    topRight: Radius.circular(borderRadius_32),
                   ),
                 ),
               ),
@@ -67,7 +68,7 @@ class UserDetailsPage extends StatelessWidget {
           ),
           SliverToBoxAdapter(
             child: Container(
-              padding: const EdgeInsets.all(24),
+              padding: const EdgeInsets.all(spacing_24),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -81,23 +82,41 @@ class UserDetailsPage extends StatelessWidget {
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
+                  const SizedBox(height: 8),
+                  Text('${user.city!}, ${user.state!} - ${user.country!}',
+                      style: Theme.of(context).textTheme.bodyMedium),
                   Hero(
                     tag: 'email-$index',
                     child: Text(
                       user.email ?? 'Email',
-                      style: Theme.of(context).textTheme.bodyLarge,
+                      style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ),
-                  Text(user.phone ?? 'Phone',
-                      style: Theme.of(context).textTheme.bodyLarge),
-                  Text(user.city ?? 'City',
-                      style: Theme.of(context).textTheme.bodyLarge),
-                  Text(user.state ?? 'State',
-                      style: Theme.of(context).textTheme.bodyLarge),
-                  Text(user.country ?? 'Country',
-                      style: Theme.of(context).textTheme.bodyLarge),
-                  Text(user.birthday ?? 'Birthday',
-                      style: Theme.of(context).textTheme.bodyLarge),
+                  Text('Phone: ${user.phone!}',
+                      style: Theme.of(context).textTheme.bodyMedium),
+                  const SizedBox(height: spacing_16),
+                  Text('Profile',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall!
+                          .copyWith(fontWeight: FontWeight.bold)),
+                  const SizedBox(height: spacing_16),
+                  const Text(
+                    """Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunrt ut labore et dolore magna aliqua.
+                    r Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    r Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    r Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                     Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
+                      Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                      """,
+                    textAlign: TextAlign.justify,
+                  ),
                 ],
               ),
             ),
